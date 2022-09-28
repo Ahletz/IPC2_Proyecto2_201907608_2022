@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<listadoInicial>
+    <configInicial id="UTF4" idEmpresa="CL4R0" idPunto="CALRO01">
+        <escritoriosActivos>
+            <escritorio idEscritorio="ESC01"/>
+            <escritorio idEscritorio="ESC03"/>
+        </escritoriosActivos>
+        <listadoClientes>
+            <cliente dpi="5009935640101">
+                <nombre> RIGOBERTA MENCHU </nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="0720" cantidad="Q500.00"/>
+                    <transaccion idTransaccion="2030" cantidad="Q5,000.00"/>
+                </listadoTransacciones>
+            </cliente>
+        </listadoClientes>
+    </configInicial>
+</listadoInicial>

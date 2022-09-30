@@ -9,8 +9,8 @@
             <cliente dpi="5009935640101">
                 <nombre> RIGOBERTA MENCHU </nombre>
                 <listadoTransacciones>
-                    <transaccion idTransaccion="0720" cantidad="Q500.00"/>
-                    <transaccion idTransaccion="2030" cantidad="Q5,000.00"/>
+                    <transaccion idTransaccion="0720" cantidad="2"/>
+                    <transaccion idTransaccion="2030" cantidad="4"/>
                 </listadoTransacciones>
             </cliente>
         </listadoClientes>

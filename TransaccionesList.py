@@ -30,7 +30,7 @@ class Nodo:
     #obtener siguientes
 
     def obtenerSiguienteId(self):
-        return self.siguiente
+        return self.siguienteId
 
     def obtenerSiguienteNombre(self):
         return self.siguienteNombre
@@ -57,7 +57,7 @@ class Nodo:
         self.siguienteId_empresa = nuevoId_empresa 
 
     
-class ListaEmpresas:
+class ListaTransacciones:
 
     def __init__(self):
         self.head = None

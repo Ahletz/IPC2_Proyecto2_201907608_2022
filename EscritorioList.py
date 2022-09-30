@@ -1,15 +1,17 @@
 class Nodo:
 
-    def __init__(self,Id, identificacion, encargado, id_punto, Id_empresa):
+    def __init__(self,Id, identificacion, encargado, estado, id_punto, Id_empresa):
         self.id = Id 
         self.identificacion = identificacion 
         self.encargado = encargado
+        self.estado = estado
         self.id_punto = id_punto
         self.id_empresa = Id_empresa
 
         self.siguienteId = None
         self.siguienteIdentificacion = None
         self.siguienteEncargado = None
+        self.siguienteEstado = None
         self.siguienteId_punto = None
         self.siguienteId_empresa = None
 
@@ -24,6 +26,9 @@ class Nodo:
     def obtenerEncargado(self):
         return self.encargado
 
+    def obtenerEstado(self):
+        return self.estado
+
     def obtenerId_Punto(self):
         return self.id_punto
 
@@ -33,13 +38,16 @@ class Nodo:
     #obtener siguientes
 
     def obtenerSiguienteId(self):
-        return self.siguiente
+        return self.siguienteId
 
     def obtenerSiguienteIdentificacion(self):
         return self.siguienteIdentificacion
     
     def obtenerSiguienteEncargado(self):
         return self.siguienteEncargado
+
+    def obtenerSiguienteEstado(self):
+        return self.siguienteEestado
 
     def obtenerSiguienteId_punto(self):
         return self.siguienteId_punto
@@ -49,30 +57,32 @@ class Nodo:
 
     #asignar nuevos datos
 
-    def asignarDato(self, Id, identificacion, encargado, Id_punto, Id_empresa):
+    def asignarDato(self, Id, identificacion, encargado, estado, Id_punto, Id_empresa):
         self.id = Id 
         self.identificacion = identificacion
         self.encargado = encargado
+        self.estado = estado
         self.id_punto = Id_punto
         self.id_empresa = Id_empresa
 
 
-    def asignarSiguiente(self,nuevoid, nuevaIdentificacion, nuevoEncargado, nuevoId_punto, nuevoId_empresa):
+    def asignarSiguiente(self,nuevoid, nuevaIdentificacion, nuevoEncargado, nuevoestado, nuevoId_punto, nuevoId_empresa):
         self.siguienteId = nuevoid
         self.siguienteIdentificacion = nuevaIdentificacion
         self.siguienteEncargado = nuevoEncargado
+        self.siguienteEstado = nuevoestado
         self.siguienteId_punto = nuevoId_punto
         self.siguienteId_empresa = nuevoId_empresa 
 
     
-class ListaEmpresas:
+class ListaEscritorios:
 
     def __init__(self):
         self.head = None
 
-    def agregar(self,Id, identificacion, encargado, id_punto, id_empresa):
-        current = Nodo(Id, identificacion, encargado, id_punto, id_empresa)
-        current.asignarSiguiente(self.head, self.head, self.head, self.head, self.head)
+    def agregar(self,Id, identificacion, encargado, estado, id_punto, id_empresa):
+        current = Nodo(Id, identificacion, encargado, estado, id_punto, id_empresa)
+        current.asignarSiguiente(self.head, self.head, self.head, self.head, self.head, self.head)
         self.head = current
 
     def tamanio(self):
@@ -87,7 +97,7 @@ class ListaEmpresas:
     def Mostrar(self):
         actual = self.head
         while actual != None:
-            print(actual.obtenerId()+actual.obtenerIdentificacion()+actual.obtenerEncargado())
+            print(actual.obtenerId()+actual.obtenerIdentificacion()+actual.obtenerEncargado(), actual.obtenerEstado())
             actual = actual.obtenerSiguienteId()
 
     def posicion(self,Id):
@@ -129,5 +139,5 @@ class ListaEmpresas:
         if previo == None:
             self.head = actual.obtenerSiguienteId()
         else:
-            previo.asignarSiguiente(actual.obtenerSiguienteId(),actual.obtenerSiguienteIdentificacion(),actual.obtenerSiguienteEncargado(), actual.obtenerSiguienteId_punto(), actual.obtenerSiguienteId_empresa())
+            previo.asignarSiguiente(actual.obtenerSiguienteId(),actual.obtenerSiguienteIdentificacion(),actual.obtenerSiguienteEncargado(), actual.obtenerSiguienteEstado(), actual.obtenerSiguienteId_punto(), actual.obtenerSiguienteId_empresa())
     

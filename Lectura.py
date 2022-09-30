@@ -1,4 +1,7 @@
+from pydoc import cli
 import xml.etree.ElementTree as ET
+from EmpresaList import *
+from ClienstesList import *
 
 class Lecturas:
 
@@ -9,42 +12,59 @@ class Lecturas:
 
         root = tree.getroot() #obtener xml
 
+        self.Empresa = ListaEmpresas()
+
+
+
 
         for i in root.findall('empresa'):
 
             Id_empresa = i.attrib.get('id') #id empresa
+            Nombre_empresa = i.find('nombre').text #nombre empres
+            Codigo_empresa = i.find('abreviatura').text #codigo de la empresa
 
-            print('NOMBRE DE LA EMPRESA: '+i.find('nombre').text) #nombre empres
-            print('CODIGO DE LA EMPRESA: '+i.find('abreviatura').text) #codigo de la empresa
+            self.Empresa.agregar(Id_empresa, Nombre_empresa, Codigo_empresa) #agregar la empresa
 
+            
             puntos = i.find('listaPuntosAtencion') #lista de puntos de atencion
 
             for j in puntos.findall('puntoAtencion'): #ciclo para encontrar todos los puntos de atencion
 
-                print('\t'+'ID PUNTO ATENCION: '+j.attrib.get('id')) #id punto de atencion 
-                print('\t'+'\t'+'NOMBRE PUNTO DE ATENCION: '+j.find('nombre').text) #nombre empres
-                print('\t'+'\t'+'DIRECCION PUNTO DE ATENCION: '+j.find('direccion').text) #codigo de la empresa
+                id_punto = j.attrib.get('id') #id punto de atencion 
+                Nombre_punto = j.find('nombre').text #nombre punto
+                Direccion_punto = j.find('direccion').text #direccion
+
+                self.Empresa.Agregar_Puntos(id_punto,Nombre_punto,Direccion_punto,Id_empresa) #agregar los puntos
 
                 escritorios = j.find('listaEscritorios') #lista de escritorios
 
                 for k in escritorios.findall('escritorio'):
 
-                    print('\t'+'\t'+'\t'+'ID ESCRITORIO: '+k.attrib.get('id')) #id escritorio
-                    print('\t'+'\t'+'\t'+'NIDENTIFICACION ESCRITORIO: '+k.find('identificacion').text) #nombre escritorio
-                    print('\t'+'\t'+'\t'+'ENCARGADO DE ESCRITORIO: '+k.find('encargado').text) #encargado escritorio
+                    id_escritorio = k.attrib.get('id') #id escritorio
+                    identificacion = k.find('identificacion').text #identificacion escritorio
+                    encargado_escritorio = k.find('encargado').text #encargado escritorio
 
-            
-            
-            
+                    Estado = 'Inactivo' #estado de todos los escritorios
+
+                    self.Empresa.Agregar_Escritorios(id_escritorio, identificacion, encargado_escritorio, Estado, id_punto,Id_empresa) #agregar los escritorios
+
+           
             print()
 
             transacciones = i.find('listaTransacciones') #lista de transacciones
 
             for l in transacciones.findall('transaccion'):
 
-                print('\t'+'ID TRANSACCION: '+l.attrib.get('id')) #id transaccion
-                print('\t'+'\t'+'NOMBRE TRANSACCION: '+l.find('nombre').text) #nombre transaccion
-                print('\t'+'\t'+'TIEMPO ATENCION: '+    l.find('tiempoAtencion').text) #tiempo transaccion
+                Id_transaccion = l.attrib.get('id') #id transaccion
+                Nombre_transaccion = l.find('nombre').text #nombre transaccion
+                Tiempo = l.find('tiempoAtencion').text #tiempo transaccion
+
+                self.Empresa.Agregar_Transacciones(Id_transaccion, Nombre_transaccion,Tiempo, Id_empresa )
+
+        
+        self.Empresa.Mostrar_Empresa()
+
+
 
 
     def Lectura_config(self):
@@ -54,6 +74,8 @@ class Lecturas:
         tree = ET.parse('Xml2.xml') #abrir xml
 
         root = tree.getroot() #obtener xml
+
+        self.Cliente = ListaClientes()
 
         for i in root.findall('configInicial'):
 
@@ -71,15 +93,21 @@ class Lecturas:
 
             for k in clientes.findall('cliente'):
 
-                print('\t'+'\t'+'DPI: '+k.attrib.get('dpi')) #dpi cliente
-                print('\t'+'\t'+'NOMBRE CLIENTE: '+k.find('nombre').text) #nombre cliente
+                dpi = k.attrib.get('dpi') #dpi cliente
+                cliente = k.find('nombre').text #nombre cliente
+
+                self.Cliente.agregar(dpi,cliente) #agregar cliente
 
                 transacciones = k.find('listadoTransacciones') #lista de transacciones
 
                 for l in transacciones.findall('transaccion'):
 
-                    print('\t'+'\t'+'\t'+'ID TRANSACCION: '+l.attrib.get('idTransaccion')) #dpi cliente
-                    print('\t'+'\t'+'\t'+'MONTO: '+l.attrib.get('cantidad')) #dpi cliente
+                    Id = l.attrib.get('idTransaccion') #id transaccion
+                    cantidad = l.attrib.get('cantidad') #cantidad de transacciones
+
+                    self.Cliente.Agreagar_Transacciones_clientes(Id, cantidad, dpi)
+
+        self.Cliente.Mostrar_clientes()
 
 
 

@@ -1,12 +1,14 @@
 
 class Nodo:
 
-    def __init__(self,Id, direccion, Id_empresa):
+    def __init__(self,Id, nombre, direccion, Id_empresa):
         self.id = Id 
+        self.nombre = nombre
         self.direccion = direccion
         self.id_empresa = Id_empresa
 
         self.siguienteId = None
+        self.siguienteNombre = None
         self.siguienteDireccion = None
         self.siguienteId_empresa = None
 
@@ -14,6 +16,9 @@ class Nodo:
 
     def obtenerId(self):
         return self.id
+
+    def obtenerNombre(self):
+        return self.nombre
 
     def obtenerDireccion(self):
         return self.direccion
@@ -24,7 +29,10 @@ class Nodo:
     #obtener siguientes
 
     def obtenerSiguienteId(self):
-        return self.siguiente
+        return self.siguienteId
+
+    def obtenerSiguienteNombre(self):
+        return self.siguienteNombre
 
     def obtenerSiguienteDireccion(self):
         return self.siguienteDireccion
@@ -34,25 +42,27 @@ class Nodo:
 
     #asignar nuevos datos
 
-    def asignarDato(self, Id, direccion, Id_empresa):
+    def asignarDato(self, Id, nombre, direccion, Id_empresa):
         self.id = Id
+        self.nombre = nombre
         self.direccion = direccion
         self.Id_empresa = Id_empresa
 
-    def asignarSiguiente(self,nuevoid, nuevaDireccion, nuevoId_empresa):
+    def asignarSiguiente(self,nuevoid, nuevoNombre, nuevaDireccion, nuevoId_empresa):
         self.siguienteId = nuevoid
+        self.siguienteNombre = nuevoNombre
         self.siguienteDireccion = nuevaDireccion
         self.siguienteId_empresa = nuevoId_empresa 
 
     
-class ListaEmpresas:
+class ListaPuntos:
 
     def __init__(self):
         self.head = None
 
-    def agregar(self,Id, direccion, id_empresa):
-        current = Nodo(Id, direccion, id_empresa)
-        current.asignarSiguiente(self.head,self.head,self.head)
+    def agregar(self,Id, nombre, direccion, id_empresa):
+        current = Nodo(Id, nombre,direccion, id_empresa)
+        current.asignarSiguiente(self.head,self.head,self.head,self.head)
         self.head = current
 
     def tamanio(self):
@@ -67,7 +77,7 @@ class ListaEmpresas:
     def Mostrar(self):
         actual = self.head
         while actual != None:
-            print(actual.obtenerId()+actual.obtenerDireccion())
+            print(actual.obtenerId()+actual.obtenerNombre()+actual.obtenerDireccion())
             actual = actual.obtenerSiguienteId()
 
     def buscar(self,Id):
@@ -97,5 +107,5 @@ class ListaEmpresas:
         if previo == None:
             self.head = actual.obtenerSiguienteId()
         else:
-            previo.asignarSiguiente(actual.obtenerSiguienteId(),actual.obtenerSiguienteDireccion(),actual.obtenerSiguienteId_empresa())
+            previo.asignarSiguiente(actual.obtenerSiguienteId(),actual.obtenerSiguienteNombre(),actual.obtenerSiguienteDireccion(),actual.obtenerSiguienteId_empresa())
     

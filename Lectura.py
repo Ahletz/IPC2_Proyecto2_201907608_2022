@@ -12,7 +12,7 @@ class Lecturas:
 
         for i in root.findall('empresa'):
 
-            print('ID DE LA EMPRESA: '+i.attrib.get('id')) #id empresa
+            Id_empresa = i.attrib.get('id') #id empresa
 
             print('NOMBRE DE LA EMPRESA: '+i.find('nombre').text) #nombre empres
             print('CODIGO DE LA EMPRESA: '+i.find('abreviatura').text) #codigo de la empresa
@@ -33,6 +33,9 @@ class Lecturas:
                     print('\t'+'\t'+'\t'+'NIDENTIFICACION ESCRITORIO: '+k.find('identificacion').text) #nombre escritorio
                     print('\t'+'\t'+'\t'+'ENCARGADO DE ESCRITORIO: '+k.find('encargado').text) #encargado escritorio
 
+            
+            
+            
             print()
 
             transacciones = i.find('listaTransacciones') #lista de transacciones

@@ -1,8 +1,7 @@
-from Lectura import *
+from Interfaz import *
 
 
-lectura = Lecturas()
-lectura.Lectura_Empresa()
+menu = Menus()
 
-lectura.Lectura_config()
+menu.Menu_principal()
 

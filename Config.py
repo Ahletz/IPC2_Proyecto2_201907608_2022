@@ -14,7 +14,9 @@ class Acciones:
 
         self.ruta_sistema = filedialog.askopenfilename(title='abrir', initialdir='C:/')
 
-        print(self.ruta_sistema)
+        self.analisis.Lectura_Empresa(self.ruta_sistema)
+
+
 
     def Abrir_Archivo2(self):
 
@@ -22,11 +24,53 @@ class Acciones:
 
         self.ruta_config = filedialog.askopenfilename(title='abrir', initialdir='C:/')
 
-        print(self.ruta_config)
+        self.analisis.Lectura_config(self.ruta_config)
 
     def Crear_empresa(self):
 
         self.analisis.Agregar_empresa()
+
+    def Seleccion(self):
+
+        print()
+        print('||----------------------SELECCION DE DATOS----------------------||')
+        print()
+        print('|| SELECCIONE UNA EMPRESA:                                      ||')
+        print()
+
+        self.analisis.Mostrar_empresa()
+
+        print()
+
+        seleccion = int(input())
+
+        print()
+
+        id_empresa=self.analisis.Obtener_id_empresa(seleccion)
+
+        print('|| ID EMPRESA SELECCIONADO: '+id_empresa+'                     ||')
+
+        print()
+
+        print('|| SELECCIONE UN PUNTO:                                        ||')
+        print()
+
+        self.analisis.Mostrar_puntos(id_empresa)
+
+        print()
+
+        seleccion = int(input())
+
+        print()
+
+        id_punto=self.analisis.Obtener_id_punto(seleccion, id_empresa)
+
+        print('|| ID EMPRESA SELECCIONADO: '+id_punto+'                     ||')
+
+        print()
+
+
+        
 
 
     

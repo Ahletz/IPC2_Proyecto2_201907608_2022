@@ -80,6 +80,18 @@ class ListaPuntos:
             print(actual.obtenerId()+actual.obtenerNombre()+actual.obtenerDireccion())
             actual = actual.obtenerSiguienteId()
 
+
+    def Mostrar_puntos(self, id_empresa):
+        actual = self.head
+        contador = 0
+        while actual != None:
+
+            if actual.obtenerId_Empresa() == id_empresa:
+            
+                contador +=1
+                print(str(contador)+' ID: '+actual.obtenerId()+' NOMBRE: '+actual.obtenerNombre()+' DIRECCION: '+actual.obtenerDireccion())
+            actual = actual.obtenerSiguienteId()
+
     def buscar(self,Id):
         actual = self.head
         encontrado = False
@@ -92,6 +104,26 @@ class ListaPuntos:
                 contador +=1
 
         return contador
+
+    def Obtener_id(self, seleccion, id_empresa):
+
+        actual = self.head
+        contador = 0
+
+        while actual != None:
+
+            if id_empresa == actual.obtenerId_Empresa():
+
+                contador +=1
+
+            if contador == seleccion and id_empresa == actual.obtenerId_Empresa():
+
+                id_punto = actual.obtenerId()
+
+            actual = actual.obtenerSiguienteId()
+
+
+        return id_punto
 
     def Eliminar(self,Id):
         actual = self.head

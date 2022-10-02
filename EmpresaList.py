@@ -75,9 +75,11 @@ class ListaEmpresas:
 
     def Mostrar(self):
         actual = self.head
+        contador = 1
         while actual != None:
-            print(actual.obtenerId()+actual.obtenerNombre()+actual.obtenerAbreviatura())
+            print(str(contador)+' ID: '+actual.obtenerId()+' NOMBRE: '+actual.obtenerNombre()+' ABREVIATURA: '+actual.obtenerAbreviatura())
             actual = actual.obtenerSiguienteId()
+            contador +=1
 
     def buscar(self,Id):
         actual = self.head
@@ -91,6 +93,20 @@ class ListaEmpresas:
                 contador +=1
 
         return contador
+
+
+    def Obtener_id(self, seleccion):
+
+        actual = self.head
+
+        for i in range(seleccion-1):
+
+            actual = actual.obtenerSiguienteId()
+
+        Id_empresa = actual.obtenerId()
+
+        return Id_empresa
+
 
     def Eliminar(self,Id):
         actual = self.head
@@ -123,14 +139,34 @@ class ListaEmpresas:
 
         self.Escritorios.agregar(Id, identificacion, encargado, estado, id_punto, id_empresa)
 
-    def Mostrar_Empresa(self):
-        self.Mostrar()
-        print()
-        self.Puntos.Mostrar()
-        print()
+
+    def Mostrar_puntos(self, id_empresa):
+
+        self.Puntos.Mostrar_puntos(id_empresa)    
+
+
+    def Obtener_id_punto(self, numero, id_empresa):
+
+        id_punto = self.Puntos.Obtener_id(numero, id_empresa)
+
+        return id_punto
+
+
+    def Activar_Escritorio(self, Id, id_punto, id_empresa):
+
+        self.Escritorios.Acrivar_escritorios(Id, id_punto, id_empresa)
+
+
+    def Mostrar_escritorios(self, id_empresa, id_punto):
+
+        self.Escritorios.Mostrar_escritorios(id_empresa, id_punto)
+
+    def Mostrar_todos_escritorios(self):
+
         self.Escritorios.Mostrar()
-        print()
-        self.Transacciones.Mostrar()
+
+
+    
 
 
         

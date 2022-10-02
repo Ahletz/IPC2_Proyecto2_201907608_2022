@@ -10,10 +10,10 @@ class Lecturas:
         self.Empresa = ListaEmpresas()
         self.Cliente = ListaClientes()
 
-    def Lectura_Empresa(self):
+    def Lectura_Empresa(self, direccion):
 
 
-        tree = ET.parse('Xml1.xml') #abrir xml
+        tree = ET.parse(direccion) #abrir xml
 
         root = tree.getroot() #obtener xml
 
@@ -62,9 +62,12 @@ class Lecturas:
 
                 self.Empresa.Agregar_Transacciones(Id_transaccion, Nombre_transaccion,Tiempo, Id_empresa )
 
-        
-        self.Empresa.Mostrar_Empresa()
-
+        print()
+        print('|| DATOS AGREGADOR CORRECTAMENTE.                               ||')
+        print()
+        print()
+        self.Empresa.Mostrar_todos_escritorios()
+        print()
 
     def Agregar_empresa(self):
 
@@ -208,26 +211,32 @@ class Lecturas:
         print()
         print('||------------------DATOS AGREGADOS CON EXITO!------------------||')
         print()
+
+        
+
+
             
-    def Lectura_config(self):
+    def Lectura_config(self, direccion):
 
         print('------------------------------------------------------------------')
 
-        tree = ET.parse('Xml2.xml') #abrir xml
+        tree = ET.parse(direccion) #abrir xml
 
         root = tree.getroot() #obtener xml
 
         for i in root.findall('configInicial'):
 
-            print('\t'+'ID CONFIGURACION: '+i.attrib.get('id')) #id configuracion inicial
-            print('\t'+'ID DE LA EMPRESA: '+i.attrib.get('idEmpresa')) #id empresa
-            print('\t'+'ID PUNTO: '+i.attrib.get('idPunto')) #id punto
+            id_configuracion = i.attrib.get('id') #id configuracion inicial
+            id_empresa= i.attrib.get('idEmpresa') #id empresa
+            id_punto = i.attrib.get('idPunto') #id punto
 
             activos = i.find('escritoriosActivos')
 
             for j in activos.findall('escritorio'):
                 
-                print('ID ESCRITORIO: '+j.attrib.get('idEscritorio')) #id escritorio activo
+                Id_escritorio = j.attrib.get('idEscritorio') #id escritorio activo
+
+                self.Empresa.Activar_Escritorio(Id_escritorio, id_punto, id_empresa)
 
             clientes = i.find('listadoClientes') #listado de clientes
 
@@ -247,7 +256,43 @@ class Lecturas:
 
                     self.Cliente.Agreagar_Transacciones_clientes(Id, cantidad, dpi)
 
-        self.Cliente.Mostrar_clientes()
+            
+
+        print()
+        print('|| DATOS AGREGADOR CORRECTAMENTE.                               ||')
+        print()
+
+        
+        self.Empresa.Mostrar_todos_escritorios()
+        print()
+
+        
+
+
+    def Mostrar_empresa(self):
+
+        self.Empresa.Mostrar()
+
+    def Mostrar_puntos(self, id_empresa):
+
+        self.Empresa.Mostrar_puntos(id_empresa)
+
+
+    def Obtener_id_empresa(self, numero):
+
+        id_empresa = self.Empresa.Obtener_id(numero)
+
+        return id_empresa
+
+    def Obtener_id_punto(self, numero, id_empresa):
+
+        id_punto = self.Empresa.Obtener_id_punto(numero, id_empresa)
+
+        return id_punto
+
+    def Mostrar_escritorios(self, id_empresa, id_punto):
+
+        self.Empresa.Mostrar_escritorios(id_empresa, id_punto)
 
 
 

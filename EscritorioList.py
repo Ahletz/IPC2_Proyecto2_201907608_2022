@@ -96,8 +96,22 @@ class ListaEscritorios:
 
     def Mostrar(self):
         actual = self.head
+        contador = 0
         while actual != None:
-            print(actual.obtenerId()+actual.obtenerIdentificacion()+actual.obtenerEncargado(), actual.obtenerEstado())
+            contador +=1    
+            print(str(contador)+' ID:'+actual.obtenerId()+' IDENTIFICACION: '+actual.obtenerIdentificacion()+' ENCARGADO: '+actual.obtenerEncargado()+' ESTADO: '+actual.obtenerEstado())
+            actual = actual.obtenerSiguienteId()
+
+    def Mostrar_escritorios(self, id_empresa, id_punto):
+        actual = self.head
+        contador = 0
+        while actual != None:
+
+            if actual.obtenerId_Empresa() == id_empresa and actual.obtenerId_Punto() == id_punto:
+                contador +=1
+                
+                print(str(contador)+' ID:'+actual.obtenerId()+' IDENTIFICACION: '+actual.obtenerIdentificacion()+' ENCARGADO: '+actual.obtenerEncargado()+' ESTADO: '+actual.obtenerEstado())
+            
             actual = actual.obtenerSiguienteId()
 
     def posicion(self,Id):
@@ -141,3 +155,14 @@ class ListaEscritorios:
         else:
             previo.asignarSiguiente(actual.obtenerSiguienteId(),actual.obtenerSiguienteIdentificacion(),actual.obtenerSiguienteEncargado(), actual.obtenerSiguienteEstado(), actual.obtenerSiguienteId_punto(), actual.obtenerSiguienteId_empresa())
     
+
+    def Acrivar_escritorios(self, Id, id_punto, id_empresa):
+        actual = self.head
+
+        while actual != None:
+
+            if Id == actual.obtenerId() and id_punto == actual.obtenerId_Punto() and id_empresa == actual.obtenerId_Empresa():
+
+                actual.estado = 'Activo'
+
+            actual = actual.obtenerSiguienteId()

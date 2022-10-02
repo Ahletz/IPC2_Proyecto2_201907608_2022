@@ -34,7 +34,7 @@ class Menus:
 
             elif seleccion == '2':
 
-                pass
+                self.llamado.Seleccion()
 
             elif seleccion == '3':
 

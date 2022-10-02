@@ -127,7 +127,7 @@ class Menus:
 
             elif seleccion == '2':
 
-                pass
+                self.llamado.Activar()
 
             elif seleccion == '3':
 

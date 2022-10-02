@@ -294,6 +294,10 @@ class Lecturas:
 
         self.Empresa.Mostrar_escritorios(id_empresa, id_punto)
 
+    def Activar(self, id_punto, id_empresa):
+
+        self.Empresa.Activar(id_punto, id_empresa)
+
 
 
 

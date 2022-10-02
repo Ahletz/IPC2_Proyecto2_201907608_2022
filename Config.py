@@ -46,16 +46,16 @@ class Acciones:
 
         print()
 
-        id_empresa=self.analisis.Obtener_id_empresa(seleccion)
+        self.id_empresa=self.analisis.Obtener_id_empresa(seleccion)
 
-        print('|| ID EMPRESA SELECCIONADO: '+id_empresa+'                     ||')
+        print('|| ID EMPRESA SELECCIONADO: '+self.id_empresa+'                     ||')
 
         print()
 
         print('|| SELECCIONE UN PUNTO:                                        ||')
         print()
 
-        self.analisis.Mostrar_puntos(id_empresa)
+        self.analisis.Mostrar_puntos(self.id_empresa)
 
         print()
 
@@ -63,11 +63,16 @@ class Acciones:
 
         print()
 
-        id_punto=self.analisis.Obtener_id_punto(seleccion, id_empresa)
+        self.id_punto=self.analisis.Obtener_id_punto(seleccion, self.id_empresa)
 
-        print('|| ID EMPRESA SELECCIONADO: '+id_punto+'                     ||')
+        print('|| ID EMPRESA SELECCIONADO: '+self.id_punto+'                     ||')
 
         print()
+
+
+    def Activar(self):
+
+        self.analisis.Activar(self.id_punto, self.id_empresa)
 
 
         

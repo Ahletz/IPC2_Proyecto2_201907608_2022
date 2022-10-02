@@ -166,6 +166,11 @@ class ListaEmpresas:
         self.Escritorios.Mostrar()
 
 
+    def Activar(self, id_punto, id_empresa):
+
+        self.Escritorios.Activar(id_punto, id_empresa)
+
+
     
 
 

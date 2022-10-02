@@ -166,3 +166,38 @@ class ListaEscritorios:
                 actual.estado = 'Activo'
 
             actual = actual.obtenerSiguienteId()
+
+
+    def Activar(self, id_punto, id_empresa):
+
+        self.Mostrar_escritorios(id_empresa, id_punto)
+        print()
+
+        print('|| SELECCIONE UN ESCRITORIO PARA ACTIVAR:     ||')
+
+        print()
+
+        select = int(input())-1
+
+        print()
+
+        actual = self.head
+
+        for i in range(select):
+
+            id_escritorio = actual.obtenerId()
+
+            actual = actual.obtenerSiguienteId()
+
+        print(id_escritorio)
+        print()
+
+        self.Acrivar_escritorios(id_escritorio, id_punto, id_empresa)
+
+        
+
+            
+
+
+
+        

@@ -1,14 +1,21 @@
 
 import xml.etree.ElementTree as ET
 from EmpresaList import *
+from PuntosList import *
+from EscritorioList import *
 from ClienstesList import *
+from TransaccionesList import *
 
 class Lecturas:
 
     def __init__(self):
 
         self.Empresa = ListaEmpresas()
+        self.Punto = ListaPuntos()
+        self.Escritorios = ListaEscritorios()
         self.Cliente = ListaClientes()
+        self.Transacciones = ListaTransacciones()
+        self.ClientesTransacciones = ListaclientTransacciones ()
 
     def Lectura_Empresa(self, direccion):
 
@@ -35,7 +42,7 @@ class Lecturas:
                 Nombre_punto = j.find('nombre').text #nombre punto
                 Direccion_punto = j.find('direccion').text #direccion
 
-                self.Empresa.Agregar_Puntos(id_punto,Nombre_punto,Direccion_punto,Id_empresa) #agregar los puntos
+                self.Punto.agregar(id_punto,Nombre_punto,Direccion_punto,Id_empresa) #agregar los puntos
 
                 escritorios = j.find('listaEscritorios') #lista de escritorios
 
@@ -47,7 +54,7 @@ class Lecturas:
 
                     Estado = 'Inactivo' #estado de todos los escritorios
 
-                    self.Empresa.Agregar_Escritorios(id_escritorio, identificacion, encargado_escritorio, Estado, id_punto,Id_empresa) #agregar los escritorios
+                    self.Escritorios.agregar(id_escritorio, identificacion, encargado_escritorio, Estado, id_punto,Id_empresa) #agregar los escritorios
 
            
             print()
@@ -60,14 +67,12 @@ class Lecturas:
                 Nombre_transaccion = l.find('nombre').text #nombre transaccion
                 Tiempo = l.find('tiempoAtencion').text #tiempo transaccion
 
-                self.Empresa.Agregar_Transacciones(Id_transaccion, Nombre_transaccion,Tiempo, Id_empresa )
+                self.Transacciones.agregar(Id_transaccion, Nombre_transaccion,Tiempo, Id_empresa )
 
         print()
         print('|| DATOS AGREGADOR CORRECTAMENTE.                               ||')
         print()
-        print()
-        self.Empresa.Mostrar_todos_escritorios()
-        print()
+        
 
     def Agregar_empresa(self):
 
@@ -142,7 +147,7 @@ class Lecturas:
             print('ID: '+id_punto+' NOMBRE: '+Nombre_punto+' DIRECCION: '+Direccion_punto)
             print('------------------------------------------------------------------')
             print()
-            self.Empresa.Agregar_Puntos(id_punto,Nombre_punto,Direccion_punto,Id_empresa) #agregar los puntos
+            self.Punto.agregar(id_punto,Nombre_punto,Direccion_punto,Id_empresa) #agregar los puntos
 
 
             print('|| INGRESE LA CANTIDAD DE ESCRITORIOS DISPONIBLES:              ||')
@@ -177,7 +182,7 @@ class Lecturas:
                 print('ID: '+id_escritorio+' IDENTIFICACION: '+identificacion+' ENCARGADO: '+encargado_escritorio+ ' ESTADO: '+Estado)
                 print('------------------------------------------------------------------')
                 print()
-                self.Empresa.Agregar_Escritorios(id_escritorio, identificacion, encargado_escritorio, Estado, id_punto,Id_empresa) #agregar los escritorios
+                self.Escritorios.agregar(id_escritorio, identificacion, encargado_escritorio, Estado, id_punto,Id_empresa) #agregar los escritorios
 
         print('|| INGRESE LA CANTIDAD DE TRANSACCIONES DISPONIBLES:            ||')
         print()
@@ -206,11 +211,12 @@ class Lecturas:
             print('ID: '+Id_transaccion+' NOMBRE: '+Nombre_transaccion+' TIEMPO: '+Tiempo)
             print('------------------------------------------------------------------')
             print()
-            self.Empresa.Agregar_Transacciones(Id_transaccion, Nombre_transaccion,Tiempo, Id_empresa )
+            self.Transacciones.agregar(Id_transaccion, Nombre_transaccion,Tiempo, Id_empresa )
 
         print()
         print('||------------------DATOS AGREGADOS CON EXITO!------------------||')
         print()
+        self.Escritorios.Mostrar()
 
         
 
@@ -236,7 +242,7 @@ class Lecturas:
                 
                 Id_escritorio = j.attrib.get('idEscritorio') #id escritorio activo
 
-                self.Empresa.Activar_Escritorio(Id_escritorio, id_punto, id_empresa)
+                self.Escritorios.Acrivar_escritorios(Id_escritorio, id_punto, id_empresa)
 
             clientes = i.find('listadoClientes') #listado de clientes
 
@@ -254,7 +260,7 @@ class Lecturas:
                     Id = l.attrib.get('idTransaccion') #id transaccion
                     cantidad = l.attrib.get('cantidad') #cantidad de transacciones
 
-                    self.Cliente.Agreagar_Transacciones_clientes(Id, cantidad, dpi)
+                    self.ClientesTransacciones.agregar(Id, cantidad, dpi)
 
             
 
@@ -262,43 +268,43 @@ class Lecturas:
         print('|| DATOS AGREGADOR CORRECTAMENTE.                               ||')
         print()
 
-        
-        self.Empresa.Mostrar_todos_escritorios()
-        print()
-
-        
+        self.Escritorios.Mostrar()
 
 
-    def Mostrar_empresa(self):
+    #OPERACIONES CON EMPRESA
+
+    def Mostrar_empresa(self): #mostrar los nombres de la empresa
 
         self.Empresa.Mostrar()
 
-    def Mostrar_puntos(self, id_empresa):
+    def Obtener_id_empresa(self,seleccion): #seleccionar la empresa por medio del id
 
-        self.Empresa.Mostrar_puntos(id_empresa)
+        Id = self.Empresa.Obtener_id(seleccion)
 
-
-    def Obtener_id_empresa(self, numero):
-
-        id_empresa = self.Empresa.Obtener_id(numero)
-
-        return id_empresa
-
-    def Obtener_id_punto(self, numero, id_empresa):
-
-        id_punto = self.Empresa.Obtener_id_punto(numero, id_empresa)
-
-        return id_punto
-
-    def Mostrar_escritorios(self, id_empresa, id_punto):
-
-        self.Empresa.Mostrar_escritorios(id_empresa, id_punto)
-
-    def Activar(self, id_punto, id_empresa):
-
-        self.Empresa.Activar(id_punto, id_empresa)
+        return Id
 
 
+    #OPERACIONES CON PUNTOS
+
+    def Mostrar_puntos(self, id_empresa): #mostrar nombres de la empresa seleccionada
+
+        self.Punto.Mostrar_puntos(id_empresa)
+
+
+    def Obtener_id_punto(self, seleccion, id_empresa): #seleccionar el punro por medio del id de la empresa
+
+        Id = self.Punto.Obtener_id(seleccion, id_empresa)
+
+        return Id
+
+
+
+    #OPERACIONES CON ESCRITORIOS
+
+    
+
+
+    
 
 
                 

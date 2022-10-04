@@ -6,6 +6,9 @@ class Acciones:
     def __init__(self) -> None:
         
         self.analisis = Lecturas()
+        print()
+        print('||------------------------SISTEMA LIMPIO------------------------||')
+        print()
 
 
     def Abrir_Archivo1(self):
@@ -70,12 +73,5 @@ class Acciones:
         print()
 
 
-    def Activar(self):
-
-        self.analisis.Activar(self.id_punto, self.id_empresa)
-
-
-        
-
-
+    
     

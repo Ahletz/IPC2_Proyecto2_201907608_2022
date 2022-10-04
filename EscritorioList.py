@@ -177,7 +177,7 @@ class ListaEscritorios:
 
         print()
 
-        select = int(input())-1
+        select = int(input())
 
         print()
 

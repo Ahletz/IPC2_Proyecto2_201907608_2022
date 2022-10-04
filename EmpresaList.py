@@ -125,50 +125,7 @@ class ListaEmpresas:
             previo.asignarSiguiente(actual.obtenerSiguienteId(),actual.obtenerSiguienteNombre(),actual.obtenerSiguienteAbreviatura())
     
 
-    #operacines de la empresa
-    def Agregar_Puntos(self, Id, nombre, direccion, id_empresa):
-
-        self.Puntos.agregar(Id, nombre, direccion,id_empresa)
-        
-
-    def Agregar_Transacciones(self,Id, nombre, tiempo, id_empresa):
-
-        self.Transacciones.agregar(Id, nombre, tiempo, id_empresa)
-    
-    def Agregar_Escritorios(self, Id, identificacion, encargado, estado, id_punto, id_empresa):
-
-        self.Escritorios.agregar(Id, identificacion, encargado, estado, id_punto, id_empresa)
-
-
-    def Mostrar_puntos(self, id_empresa):
-
-        self.Puntos.Mostrar_puntos(id_empresa)    
-
-
-    def Obtener_id_punto(self, numero, id_empresa):
-
-        id_punto = self.Puntos.Obtener_id(numero, id_empresa)
-
-        return id_punto
-
-
-    def Activar_Escritorio(self, Id, id_punto, id_empresa):
-
-        self.Escritorios.Acrivar_escritorios(Id, id_punto, id_empresa)
-
-
-    def Mostrar_escritorios(self, id_empresa, id_punto):
-
-        self.Escritorios.Mostrar_escritorios(id_empresa, id_punto)
-
-    def Mostrar_todos_escritorios(self):
-
-        self.Escritorios.Mostrar()
-
-
-    def Activar(self, id_punto, id_empresa):
-
-        self.Escritorios.Activar(id_punto, id_empresa)
+   
 
 
     

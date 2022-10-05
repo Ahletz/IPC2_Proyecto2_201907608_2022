@@ -123,15 +123,15 @@ class Menus:
 
             if seleccion == '1':
 
-                pass
+                self.llamado.Ver_info_punto()
 
             elif seleccion == '2':
 
-                pass
+                self.llamado.Activar_escritorio_especifico()
 
             elif seleccion == '3':
 
-                pass
+                self.llamado.Desacrivar_escritorio_esécifico()
 
             elif seleccion == '4':
 

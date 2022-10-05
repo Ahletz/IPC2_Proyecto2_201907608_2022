@@ -123,3 +123,89 @@ class ListaTransacciones:
         else:
             previo.asignarSiguiente(actual.obtenerSiguienteId(),actual.obtenerSiguienteNombre(),actual.obtenerSiguienteTiempo(), actual.obtenerSiguienteId_empresa())
     
+
+    def Tiempo_promedio(self,id_empresa):
+
+        actual = self.head
+        contador = 0
+        tiempo = 0
+
+        while actual != None:
+
+            if actual.obtenerId_Empresa() == id_empresa: #contar cantidad de transacciones disponibles en la empresa
+
+                contador +=1
+                tiempo += float(actual.tiempo)
+
+            actual = actual.obtenerSiguienteId()
+
+        promedio = tiempo/contador
+
+        print()
+        print('||-------------------TIEMPO PROMEDIO ATENCION-------------------||')
+        print('TIEMPO PROMEDIO: '+str(promedio))
+        print()
+
+
+    def Tiempo_maximo(self, id_empresa):
+
+        actual = self.head
+        tiempo = 0
+
+        tiempo = float(actual.tiempo)
+
+        actual.obtenerSiguienteId()
+
+        while actual != None:
+
+            if actual.obtenerId_Empresa() == id_empresa: #obtener el mayor tiempo de atencion
+
+                if float(actual.obtenerTiempo()) > tiempo:
+
+                    tiempo = float(actual.tiempo)
+
+            actual = actual.obtenerSiguienteId()
+
+
+        print()
+        print('||------------------TIEMPO MAXIMO DE ATENCION-------------------||')
+        print('TIEMPO MAXIMO: '+str(tiempo))
+        print()
+
+
+    def Tiempo_minimo(self, id_empresa):
+
+        actual = self.head
+        tiempo = 0
+
+        tiempo = float(actual.tiempo)
+
+        actual.obtenerSiguienteId()
+
+        while actual != None:
+
+            if actual.obtenerId_Empresa() == id_empresa: #obtener el mayor tiempo de atencion
+
+                if float(actual.obtenerTiempo()) < tiempo:
+
+                    tiempo = float(actual.tiempo)
+
+            actual = actual.obtenerSiguienteId()
+
+
+        print()
+        print('||-------------------TIEMPO MINIMO DE ATENCION-------------------||')
+        print('TIEMPO MINIMO: '+str(tiempo))
+        print()
+
+
+        
+        
+
+
+
+        
+
+
+
+        

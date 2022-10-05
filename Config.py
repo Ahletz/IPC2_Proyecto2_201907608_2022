@@ -72,6 +72,19 @@ class Acciones:
 
         print()
 
+    def Activar_escritorio_especifico(self):
+
+        self.analisis.Activar_escritorio_especifico(self.id_punto, self.id_empresa)
+
+
+    def Desacrivar_escritorio_esécifico(self):
+
+        self.analisis.Desactivar_escritorio_especifico(self.id_punto, self.id_empresa)
+
+    def Ver_info_punto(self):
+
+        self.analisis.Tiempos_atencion(self.id_empresa)
+
 
     
     

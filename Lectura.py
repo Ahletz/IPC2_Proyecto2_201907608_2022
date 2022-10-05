@@ -301,6 +301,38 @@ class Lecturas:
 
     #OPERACIONES CON ESCRITORIOS
 
+
+    def Activar_escritorio_especifico(self, id_punto, id_empresa):
+
+        self.Escritorios.Activar(id_punto, id_empresa)
+
+        print()
+        print('||----------------------ESCRITORIO ACTIVADO---------------------||')
+        print()
+
+        self.Escritorios.Mostrar_escritorios(id_empresa, id_punto)
+
+    def Desactivar_escritorio_especifico(self, id_punto, id_empresa):
+
+        self.Escritorios.Desactivar(id_punto, id_empresa)
+
+        print()
+        print('||--------------------ESCRITORIO DESACTIVADO--------------------||')
+        print()
+
+        self.Escritorios.Mostrar_escritorios(id_empresa, id_punto)
+
+
+    #OPERACIONES CON TRANSACCIONES 
+
+    def Tiempos_atencion(self, id_empresa):
+
+        self.Transacciones.Tiempo_promedio(id_empresa)
+        self.Transacciones.Tiempo_maximo(id_empresa)
+        self.Transacciones.Tiempo_minimo(id_empresa)
+
+
+
     
 
 

@@ -194,6 +194,46 @@ class ListaEscritorios:
 
         self.Acrivar_escritorios(id_escritorio, id_punto, id_empresa)
 
+
+    def Desactivar_escritorios(self, Id, id_punto, id_empresa):
+        actual = self.head
+
+        while actual != None:
+
+            if Id == actual.obtenerId() and id_punto == actual.obtenerId_Punto() and id_empresa == actual.obtenerId_Empresa():
+
+                actual.estado = 'Inactivo'
+
+            actual = actual.obtenerSiguienteId()
+
+
+    def Desactivar(self, id_punto, id_empresa):
+
+        self.Mostrar_escritorios(id_empresa, id_punto)
+        print()
+
+        print('|| SELECCIONE UN ESCRITORIO PARA DESACTIVAR:     ||')
+
+        print()
+
+        select = int(input())
+
+        print()
+
+        actual = self.head
+
+        for i in range(select):
+
+            id_escritorio = actual.obtenerId()
+
+            actual = actual.obtenerSiguienteId()
+
+        print(id_escritorio)
+        print()
+
+        self.Desactivar_escritorios(id_escritorio, id_punto, id_empresa)
+
+
         
 
             

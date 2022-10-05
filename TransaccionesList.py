@@ -76,10 +76,13 @@ class ListaTransacciones:
 
         return contador
 
-    def Mostrar(self):
+    def Mostrar_Transacciones(self, id_empresa):
         actual = self.head
+        contador = 0
         while actual != None:
-            print(actual.obtenerId()+actual.obtenerNombre()+actual.obtenerTiempo())
+            if actual.obtenerId_Empresa() == id_empresa:
+                contador +=1
+                print(str(contador)+'. ID: '+actual.obtenerId()+' NOMBRE: '+actual.obtenerNombre()+' TIEMPO: '+actual.obtenerTiempo())
             actual = actual.obtenerSiguienteId()
 
     def posicion(self,Id):
@@ -197,6 +200,29 @@ class ListaTransacciones:
         print('||-------------------TIEMPO MINIMO DE ATENCION-------------------||')
         print('TIEMPO MINIMO: '+str(tiempo))
         print()
+
+
+    def Obtener_id(self, id_empresa, seleccion):
+
+        actual = self.head
+
+        contador = 0
+
+        while actual != None:
+
+            if actual.obtenerId_Empresa() == id_empresa:
+
+                contador +=1
+
+                if seleccion == contador:
+
+                    id_transaccion = actual.id
+
+            actual = actual.obtenerSiguienteId()
+
+        print('|| '+id_transaccion+' ||')
+
+        return id_transaccion
 
 
         

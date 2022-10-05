@@ -1,13 +1,17 @@
-from TransaccionesClientList import *
+
 
 class Nodo:
 
-    def __init__(self,Dpi, nombre):
+    def __init__(self,Dpi, nombre, id_empresa, id_punto):
         self.Dpi = Dpi 
         self.nombre = nombre
+        self.id_empresa = id_empresa
+        self.id_punto = id_punto
 
         self.siguienteDpi = None
         self.siguienteNombre = None
+        self.siguienteId_empresa = None
+        self.siguienteId_punto = None
 
     #obtener datos
 
@@ -16,6 +20,12 @@ class Nodo:
 
     def obtenerNombre(self):
         return self.nombre
+    
+    def obtenerId_empresa(self):
+        return self.id_empresa
+
+    def obtenerId_punto(self):
+        return self.id_punto
 
     #obtener siguientes
 
@@ -25,26 +35,35 @@ class Nodo:
     def obtenerSiguienteNombre(self):
         return self.siguienteNombre
 
+    def obtenerSiguienteId_empresa(self):
+        return self.siguienteId_empresa
+
+    def obtenerSiguienteId_punto(self):
+        return self.siguienteId_punto
+
     #asignar nuevos datos
 
-    def asignarDato(self, Dpi, nombre):
+    def asignarDato(self, Dpi, nombre, id_empresa, id_punto):
         self.Dpi = Dpi
         self.nombre = nombre
+        self.id_empresa = id_empresa
+        self.id_punto = id_punto
 
-    def asignarSiguiente(self,nuevoDpi, nuevonombre):
+    def asignarSiguiente(self,nuevoDpi, nuevonombre, nuevoid_empresa, nuevoid_punto):
         self.siguienteDpi = nuevoDpi
         self.siguienteNombre = nuevonombre
+        self.siguienteId_empresa = nuevoid_empresa
+        self.siguienteId_punto = nuevoid_punto 
 
     
 class ListaClientes:
 
     def __init__(self):
         self.head = None
-        self.Tranx = ListaclientTransacciones()
 
-    def agregar(self,Dpi,nombre):
-        current = Nodo(Dpi,nombre)
-        current.asignarSiguiente(self.head,self.head)
+    def agregar(self,Dpi,nombre, id_empresa, id_punto):
+        current = Nodo(Dpi,nombre,id_empresa, id_punto)
+        current.asignarSiguiente(self.head,self.head,self.head,self.head)
         self.head = current
 
     def tamanio(self):
@@ -59,7 +78,7 @@ class ListaClientes:
     def Mostrar(self):
         actual = self.head
         while actual != None:
-            print(actual.obtenerDpi()+actual.obtenerNombre())
+            print('DPI: '+actual.obtenerDpi()+' NOMBRE: '+actual.obtenerNombre())
             actual = actual.obtenerSiguienteDpi()
 
     def buscar(self,Dpi):
@@ -89,14 +108,7 @@ class ListaClientes:
         if previo == None:
             self.head = actual.obtenerSiguienteDpi()
         else:
-            previo.asignarSiguiente(actual.obtenerSiguienteDpi(),actual.obtenerSiguienteNombre())
+            previo.asignarSiguiente(actual.obtenerSiguienteDpi(),actual.obtenerSiguienteNombre(),actual.obtenerSiguienteId_empresa(),actual.obtenerSiguienteId_punto())
 
-    def Agreagar_Transacciones_clientes(self,Id,cantidad, dpi):
+    
 
-        self.Tranx.agregar(Id,cantidad, dpi)
-
-    def Mostrar_clientes(self):
-
-        self.Mostrar()
-        print()
-        self.Tranx.Mostrar()

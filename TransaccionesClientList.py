@@ -69,7 +69,7 @@ class ListaclientTransacciones:
     def Mostrar(self):
         actual = self.head
         while actual != None:
-            print(actual.obtenerId()+actual.obtenerCantidad()+actual.obtenerDpi())
+            print('ID: '+actual.obtenerId()+' CANTIDAD: '+actual.obtenerCantidad())
             actual = actual.obtenerSiguienteId()
 
     def buscar(self,Id):
@@ -100,6 +100,13 @@ class ListaclientTransacciones:
             self.head = actual.obtenerSiguienteId()
         else:
             previo.asignarSiguiente(actual.obtenerSiguienteId(),actual.obtenerSiguienteCantidad(),actual.obtenerSiguienteDpi())
+
+
+
+   
+
+
+        
     
 
 

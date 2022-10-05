@@ -83,7 +83,11 @@ class Acciones:
 
     def Ver_info_punto(self):
 
-        self.analisis.Tiempos_atencion(self.id_empresa)
+        self.analisis.Tiempos_atencion(self.id_empresa, self.id_punto)
+
+    def Solicitud_atencion(self):
+
+        self.analisis.Solicitud_clientes(self.id_empresa, self.id_punto)
 
 
     

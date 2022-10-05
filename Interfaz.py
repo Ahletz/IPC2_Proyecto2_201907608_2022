@@ -139,7 +139,7 @@ class Menus:
 
             elif seleccion == '5':
 
-                pass
+                self.llamado.Solicitud_atencion()
 
             elif seleccion == '6':
 

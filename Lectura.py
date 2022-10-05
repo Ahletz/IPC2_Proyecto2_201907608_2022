@@ -5,6 +5,7 @@ from PuntosList import *
 from EscritorioList import *
 from ClienstesList import *
 from TransaccionesList import *
+from TransaccionesClientList import*
 
 class Lecturas:
 
@@ -15,7 +16,7 @@ class Lecturas:
         self.Escritorios = ListaEscritorios()
         self.Cliente = ListaClientes()
         self.Transacciones = ListaTransacciones()
-        self.ClientesTransacciones = ListaclientTransacciones ()
+        self.ClientesTransacciones = ListaclientTransacciones()
 
     def Lectura_Empresa(self, direccion):
 
@@ -251,7 +252,7 @@ class Lecturas:
                 dpi = k.attrib.get('dpi') #dpi cliente
                 cliente = k.find('nombre').text #nombre cliente
 
-                self.Cliente.agregar(dpi,cliente) #agregar cliente
+                self.Cliente.agregar(dpi,cliente, id_empresa, id_punto) #agregar cliente
 
                 transacciones = k.find('listadoTransacciones') #lista de transacciones
 
@@ -268,7 +269,66 @@ class Lecturas:
         print('|| DATOS AGREGADOR CORRECTAMENTE.                               ||')
         print()
 
-        self.Escritorios.Mostrar()
+        
+
+    def Solicitud_clientes(self, id_empresa, id_punto):
+
+        
+
+        print()
+        print('------------------------------------------------------------------')
+        print('||---------------------SOLICITUD ATENCION-----------------------||')
+        print('------------------------------------------------------------------')
+        print()
+        print('|| INGRESE SU NUMERO DE DPI::                                   ||')
+        print()
+        dpi = input()
+        print()
+        print('|| INGRESE SU NOMBRE:                                           ||')
+        print()
+        nombre = input()
+        print()
+        print('|| DATOS INGRESADOS                                             ||')
+        print('------------------------------------------------------------------')
+        print('DPI: '+dpi+' NOMBRE: '+nombre)
+        print('------------------------------------------------------------------')
+        print()
+        self.Cliente.agregar(dpi,nombre,id_empresa,id_punto)
+        print()
+        print('|| INGRESE CANTIDAD DE TRANSACCIONES A REALIZAR:                ||')
+        print()
+        cantidad = int(input())
+        print()
+        
+        for i in range(cantidad):
+
+            self.Transacciones.Mostrar_Transacciones(id_empresa)
+
+            print()
+            print('|| INGRESE LA TRANSACCION QUE DESEA REALIZAR:                   ||')
+            print()
+
+            seleccion = int(input())
+
+            id_transaccion = self.Transacciones.Obtener_id(id_empresa, seleccion)
+
+            print()
+            print('|| INGRESE LA CANTIDAD DE VECES A REALIZAR LA TRANSACCION:      ||')
+            print()
+
+            cantidad = input()
+
+            print()
+            print('|| DATOS INGRESADOS                                             ||')
+            print('------------------------------------------------------------------')
+            print('ID: '+id_transaccion+' CANTIDAD: '+cantidad)
+            print('------------------------------------------------------------------')
+            print()
+
+            self.ClientesTransacciones.agregar(id_transaccion, cantidad,dpi)
+
+
+        
 
 
     #OPERACIONES CON EMPRESA
@@ -325,11 +385,19 @@ class Lecturas:
 
     #OPERACIONES CON TRANSACCIONES 
 
-    def Tiempos_atencion(self, id_empresa):
+    def Tiempos_atencion(self, id_empresa, id_punto):
+
+        self.Escritorios.Cantidad_activos(id_punto, id_empresa)
+        self.Escritorios.Cantidad_inactivos(id_punto, id_empresa)
 
         self.Transacciones.Tiempo_promedio(id_empresa)
         self.Transacciones.Tiempo_maximo(id_empresa)
         self.Transacciones.Tiempo_minimo(id_empresa)
+
+
+    #OPERACIONES TRANSACCIONES CLIENTES
+
+
 
 
 

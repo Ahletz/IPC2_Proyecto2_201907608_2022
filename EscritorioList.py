@@ -234,6 +234,35 @@ class ListaEscritorios:
         self.Desactivar_escritorios(id_escritorio, id_punto, id_empresa)
 
 
+    def Cantidad_activos(self, id_punto, id_empresa):
+        actual = self.head
+        contador = 0
+        while actual != None:
+
+            if actual.obtenerId_Punto() == id_punto and actual.obtenerId_Empresa() == id_empresa and actual.obtenerEstado() == 'Activo':
+                contador = contador + 1
+            actual = actual.obtenerSiguienteId()
+
+        print()
+        print('||---------------CANTIDAD DE ESCRITORIOS ACTIVOS----------------||')
+        print('CANTIDAD: '+str(contador))
+        print()
+
+    def Cantidad_inactivos(self, id_punto, id_empresa):
+        actual = self.head
+        contador = 0
+        while actual != None:
+
+            if actual.obtenerId_Punto() == id_punto and actual.obtenerId_Empresa() == id_empresa and actual.obtenerEstado() == 'Inactivo':
+                contador = contador + 1
+            actual = actual.obtenerSiguienteId()
+
+        print()
+        print('||--------------CANTIDAD DE ESCRITORIOS INACTIVOS---------------||')
+        print('CANTIDAD: '+str(contador))
+        print()
+
+
         
 
             

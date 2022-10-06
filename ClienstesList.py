@@ -139,5 +139,21 @@ class ListaClientes:
         return name
 
 
+    def Cantidad_clientes(self, id_empresa, id_punto):
+
+        actual = self.head
+        contador = 0
+
+        while actual != None:
+
+            if actual.obtenerId_empresa() == id_empresa and actual.obtenerId_punto() == id_punto:
+
+                contador +=1
+
+            actual = actual.obtenerSiguienteDpi()
+
+        return contador
+
+
         
         

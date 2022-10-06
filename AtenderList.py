@@ -1,3 +1,6 @@
+from turtle import color
+from graphviz import Digraph
+
 class Nodo:
 
     def __init__(self,Dpi, nombre, id_empresa, id_punto, id_escritorio, id_transaccion, tiempo):
@@ -103,10 +106,11 @@ class ListaAtenciones:
 
         return contador
 
-    def Mostrar(self):
+    def Mostrar(self, id_empresa, id_punto):
         actual = self.head
         while actual != None:
-            print('DPI: '+actual.obtenerDpi()+' NOMBRE: '+actual.obtenerNombre())
+            if actual.obtenerId_empresa() == id_empresa and actual.obtenerId_punto() == id_punto:  
+                print('DPI: '+actual.obtenerDpi()+' NOMBRE: '+actual.obtenerNombre()+' ESCRITORIO: '+actual.obtenerId_escritorio()+' TRANSACCION: '+actual.obtenerId_transaccion()+ ' TIEMPO: '+ str(actual.obtenerTiempo()))
             actual = actual.obtenerSiguienteDpi()
 
     def buscar(self,Dpi):
@@ -139,3 +143,27 @@ class ListaAtenciones:
             previo.asignarSiguiente(actual.obtenerSiguienteDpi(),actual.obtenerSiguienteNombre(),actual.obtenerSiguienteId_empresa(),actual.obtenerSiguienteId_punto(),actual.obtenerSiguienteId_escritorio(),actual.obtenerSiguienteId_transaccion(),actual.obtenerSiguienteTiempo())
 
     
+    def Graficar(self, id_escritorio, id_empresa, id_punto):
+
+        dot = Digraph ( 'COLAs' , filename = 'COLA.dot' , engine = 'dot' , format = 'svg' )
+        dot.attr ( rankdir = "LR" )
+        dot.node_attr.update ( shape = "box" )
+        dot.node_attr [ 'style' ] = "filled"
+        
+        contador = 0
+        
+        actual = self.head
+        while actual != None:
+
+            dot.node('ESCRITORIO: '+ id_escritorio + 'EMPRESA: '+ id_empresa + 'PUNTO: '+ id_punto,id_escritorio, color='brown')
+            
+            if actual.obtenerId_escritorio() == id_escritorio and actual.obtenerId_empresa() == id_empresa and actual.obtenerId_punto() == id_punto:
+                contador +=1
+                dot.node('DPI: '+str(actual.obtenerDpi())+' NOMBRE:'+actual.obtenerNombre()+' TRANSACCION:'+actual.obtenerId_transaccion()+' TIEMPO:'+str(actual.obtenerTiempo()))
+            actual = actual.obtenerSiguienteDpi()
+        
+
+        for i in range ( 1 , contador ) :
+            dot.edge ( str ( i ) , str ( i + 1 ) )
+        
+        dot.view()

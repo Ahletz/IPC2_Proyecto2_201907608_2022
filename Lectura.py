@@ -402,58 +402,110 @@ class Lecturas:
     def Atender_cliente(self, id_empresa, id_punto):
 
         print()
-        print('||-------------------ATENDIENDO PRIMER CLIENTE------------------||')
+        print('||----------------------ATENDIENDO CLIENTE----------------------||')
         print()
 
-        dpi = self.Cliente.Obtener_primer_cliente(id_empresa, id_punto)
+        cantidad_clientes = self.Cliente.Cantidad_clientes(id_empresa, id_punto)
 
-        nombre = self.Cliente.Obtener_nombre_primer_cliente(id_empresa, id_punto)
+        if cantidad_clientes > 0:
 
-        id_escritorio = self.Escritorios.Seleccionar_escritorio(id_empresa, id_punto)
+            dpi = self.Cliente.Obtener_primer_cliente(id_empresa, id_punto)
 
-        cantidad_transacciones = self.ClientesTransacciones.Obtener_cantidad_transacciones(dpi)
+            nombre = self.Cliente.Obtener_nombre_primer_cliente(id_empresa, id_punto)
 
-        tiempo_total = 0
-        tiempo_transaccion = 0
+            id_escritorio = self.Escritorios.Seleccionar_escritorio(id_empresa, id_punto)
 
-        if cantidad_transacciones > 0:
+            cantidad_transacciones = self.ClientesTransacciones.Obtener_cantidad_transacciones(dpi)
 
-            for i in range(1,cantidad_transacciones):
+            tiempo_total = 0
+            tiempo_transaccion = 0
 
-                #obtener el id de la transaccion y agregar dentro de la lista de atender y obtener el tiempo 
+            if cantidad_transacciones > 0:
 
-                id_transaccion = self.ClientesTransacciones.Obtener_id_transacciones(dpi,i)
+                for i in range(1,cantidad_transacciones):
 
-                tiempo = self.Transacciones.Obtener_tiempo(id_empresa, id_transaccion)
+                    #obtener el id de la transaccion y agregar dentro de la lista de atender y obtener el tiempo 
 
-                tiempo_transaccion = float(tiempo)
+                    id_transaccion = self.ClientesTransacciones.Obtener_id_transacciones(dpi,i)
 
-                tiempo_total = tiempo_transaccion * cantidad_transacciones
+                    tiempo = self.Transacciones.Obtener_tiempo(id_empresa, id_transaccion)
 
-                
+                    tiempo_transaccion = float(tiempo)
+
+                    tiempo_total = tiempo_transaccion * cantidad_transacciones
+
+                    
 
 
-                self.Atencion.agregar(dpi,nombre,id_empresa, id_punto, id_escritorio, id_transaccion, tiempo)
+                    self.Atencion.agregar(dpi,nombre,id_empresa, id_punto, id_escritorio, id_transaccion, tiempo)
+
+                print()
+                print('||------------------DATOS DEL CLIENTE ATENDIDO------------------||')
+                print()
+                print('|| DPI: '+dpi+' NOMBRE: '+nombre+' CANTIDAD TRANSACCIONES: '+str(cantidad_transacciones)+' TIEMPO TOTAL: '+str(tiempo_total)+' ESCRITORIO DE ATENCION: '+id_escritorio+' ||')
+                print()
+                print('||------------------SACANDO CLIENTE DE LA FILA------------------||')
+                print()
+
+                #eliminar el cliente y las transacciones de las listas
+                self.Cliente.Eliminar(dpi)
+
+                for i in range(1,cantidad_transacciones):
+
+                    #eliminar todas las transacciones pendientes
+
+                    id_transaccion = self.ClientesTransacciones.Obtener_id_transacciones(dpi,i)
+
+                    self.ClientesTransacciones.Eliminar(id_transaccion, dpi)
+
+            
 
 
-            print()
-            print('||------------------DATOS DEL CLIENTE ATENDIDO------------------||')
-            print()
-            print('|| DPI: '+dpi+' NOMBRE: '+nombre+' CANTIDAD TRANSACCIONES: '+str(cantidad_transacciones)+' TIEMPO TOTAL: '+str(tiempo_total)+' ESCRITORIO DE ATENCION: '+id_escritorio+' ||')
-            print()
-            print('||------------------SACANDO CLIENTE DE LA FILA------------------||')
-            print()
+    def Simulacion(self, id_empresa, id_punto):
 
-            #eliminar el cliente y las transacciones de las listas
-            self.Cliente.Eliminar(dpi)
+        Cantidad_clientes = self.Cliente.Cantidad_clientes(id_empresa, id_punto)
 
-            for i in range(1,cantidad_transacciones):
+        if Cantidad_clientes > 0:
 
-                #eliminar todas las transacciones pendientes
+            for i in range(Cantidad_clientes):
 
-                id_transaccion = self.ClientesTransacciones.Obtener_id_transacciones(dpi,i)
+                self.Atender_cliente(id_empresa, id_punto)
 
-                self.ClientesTransacciones.Eliminar(id_transaccion, dpi)
+
+        self.Atencion.Mostrar(id_empresa, id_punto)
+        print()
+        print('||--------------------------------------------------------------||')
+        print()
+        print('|| CANTIDAD DE CLIENTES ATENDIDOS : '+str(Cantidad_clientes)+' ||')
+        print()
+        print('||--------------------------------------------------------------||')
+        print()
+
+        self.Escritorios.Cantidad_activos(id_punto, id_empresa)
+        self.Escritorios.Cantidad_inactivos(id_punto, id_empresa)
+        self.Transacciones.Tiempo_promedio(id_empresa)
+        self.Transacciones.Tiempo_maximo(id_empresa)
+        self.Transacciones.Tiempo_minimo(id_empresa)
+
+
+        numero = self.Escritorios.Cantidad_numero_activos(id_punto, id_empresa)
+
+        for i in range(1,numero+1):
+
+            #obtener los id y generar los graficos
+
+            id_escritorio = self.Escritorios.Obtener_id_escritorio(id_punto,id_empresa,i)
+
+            self.Atencion.Graficar(id_escritorio, id_empresa, id_punto)
+
+            
+
+
+
+
+
+
+
 
         
         

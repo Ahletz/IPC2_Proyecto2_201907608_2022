@@ -143,7 +143,7 @@ class Menus:
 
             elif seleccion == '6':
 
-                pass
+                self.llamado.simulacion()
 
             elif seleccion == '7':
 

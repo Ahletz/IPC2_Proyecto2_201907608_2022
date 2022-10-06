@@ -298,6 +298,25 @@ class ListaEscritorios:
         return id_escritorio
 
 
+    def Obtener_id_escritorio(self, id_punto, id_empresa, numero):
+
+        actual = self.head
+        contador = 0
+        numero = numero
+        while actual != None:
+
+            if actual.obtenerId_Punto() == id_punto and actual.obtenerId_Empresa() == id_empresa and actual.obtenerEstado() == 'Activo':
+                contador = contador + 1
+
+            if contador == numero:
+
+                id_escritorio = actual.id
+
+            actual = actual.obtenerSiguienteId()
+
+        return id_escritorio
+
+
 
         
 

@@ -93,6 +93,11 @@ class Acciones:
 
         self.analisis.Atender_cliente(self.id_empresa, self.id_punto)
 
+
+    def simulacion(self):
+
+        self.analisis.Simulacion(self.id_empresa, self.id_punto)
+
     
 
 

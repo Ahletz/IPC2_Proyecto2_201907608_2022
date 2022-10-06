@@ -1,9 +1,13 @@
 from Interfaz import *
 
 
+try:
+    menu = Menus()
 
-menu = Menus()
-
-menu.Menu_principal()
+    menu.Menu_principal()
+except:
+    print()
+    print('ERROR')
+    print()
 
 

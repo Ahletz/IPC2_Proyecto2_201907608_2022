@@ -416,42 +416,44 @@ class Lecturas:
         tiempo_total = 0
         tiempo_transaccion = 0
 
-        for i in range(1,cantidad_transacciones):
+        if cantidad_transacciones > 0:
 
-            #obtener el id de la transaccion y agregar dentro de la lista de atender y obtener el tiempo 
+            for i in range(1,cantidad_transacciones):
 
-            id_transaccion = self.ClientesTransacciones.Obtener_id_transacciones(dpi,i)
+                #obtener el id de la transaccion y agregar dentro de la lista de atender y obtener el tiempo 
 
-            tiempo = self.Transacciones.Obtener_tiempo(id_empresa, id_transaccion)
+                id_transaccion = self.ClientesTransacciones.Obtener_id_transacciones(dpi,i)
 
-            tiempo_transaccion = float(tiempo)
+                tiempo = self.Transacciones.Obtener_tiempo(id_empresa, id_transaccion)
 
-            tiempo_total = tiempo_transaccion * cantidad_transacciones
+                tiempo_transaccion = float(tiempo)
 
-            
+                tiempo_total = tiempo_transaccion * cantidad_transacciones
+
+                
 
 
-            self.Atencion.agregar(dpi,nombre,id_empresa, id_punto, id_escritorio, id_transaccion, tiempo)
+                self.Atencion.agregar(dpi,nombre,id_empresa, id_punto, id_escritorio, id_transaccion, tiempo)
 
 
-        print()
-        print('||------------------DATOS DEL CLIENTE ATENDIDO------------------||')
-        print()
-        print('|| DPI: '+dpi+' NOMBRE: '+nombre+' CANTIDAD TRANSACCIONES: '+str(cantidad_transacciones)+' TIEMPO TOTAL: '+str(tiempo_total)+' ESCRITORIO DE ATENCION: '+id_escritorio+' ||')
-        print()
-        print('||------------------SACANDO CLIENTE DE LA FILA------------------||')
-        print()
+            print()
+            print('||------------------DATOS DEL CLIENTE ATENDIDO------------------||')
+            print()
+            print('|| DPI: '+dpi+' NOMBRE: '+nombre+' CANTIDAD TRANSACCIONES: '+str(cantidad_transacciones)+' TIEMPO TOTAL: '+str(tiempo_total)+' ESCRITORIO DE ATENCION: '+id_escritorio+' ||')
+            print()
+            print('||------------------SACANDO CLIENTE DE LA FILA------------------||')
+            print()
 
-        #eliminar el cliente y las transacciones de las listas
-        self.Cliente.Eliminar(dpi)
+            #eliminar el cliente y las transacciones de las listas
+            self.Cliente.Eliminar(dpi)
 
-        for i in range(1,cantidad_transacciones):
+            for i in range(1,cantidad_transacciones):
 
-            #eliminar todas las transacciones pendientes
+                #eliminar todas las transacciones pendientes
 
-            id_transaccion = self.ClientesTransacciones.Obtener_id_transacciones(dpi,i)
+                id_transaccion = self.ClientesTransacciones.Obtener_id_transacciones(dpi,i)
 
-            self.ClientesTransacciones.Eliminar(id_transaccion, dpi)
+                self.ClientesTransacciones.Eliminar(id_transaccion, dpi)
 
         
         

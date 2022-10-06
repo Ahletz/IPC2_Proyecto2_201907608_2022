@@ -1,3 +1,5 @@
+import random
+
 class Nodo:
 
     def __init__(self,Id, identificacion, encargado, estado, id_punto, Id_empresa):
@@ -144,7 +146,7 @@ class ListaEscritorios:
         previo = None
         encontrado = False
         while not encontrado:
-            if actual.obtenerDatoId() == Id:
+            if actual.obtenerId() == Id:
                 encontrado = True
             else:
                 previo = actual
@@ -261,6 +263,40 @@ class ListaEscritorios:
         print('||--------------CANTIDAD DE ESCRITORIOS INACTIVOS---------------||')
         print('CANTIDAD: '+str(contador))
         print()
+
+
+    def Cantidad_numero_activos(self, id_punto, id_empresa):
+        actual = self.head
+        contador = 0
+        while actual != None:
+
+            if actual.obtenerId_Punto() == id_punto and actual.obtenerId_Empresa() == id_empresa and actual.obtenerEstado() == 'Activo':
+                contador = contador + 1
+            actual = actual.obtenerSiguienteId()
+
+        return contador
+
+
+    def Seleccionar_escritorio(self, id_punto, id_empresa):
+
+        activos = self.Cantidad_numero_activos(id_punto, id_empresa)
+
+        actual = self.head
+        contador = 0
+        numero = random.randint(0,activos)
+        while actual != None:
+
+            if actual.obtenerId_Punto() == id_punto and actual.obtenerId_Empresa() == id_empresa and actual.obtenerEstado() == 'Activo':
+                contador = contador + 1
+
+            if contador == numero:
+
+                id_escritorio = actual.id
+
+            actual = actual.obtenerSiguienteId()
+
+        return id_escritorio
+
 
 
         

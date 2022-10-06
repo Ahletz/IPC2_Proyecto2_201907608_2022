@@ -1,17 +1,21 @@
-
-
 class Nodo:
 
-    def __init__(self,Dpi, nombre, id_empresa, id_punto):
+    def __init__(self,Dpi, nombre, id_empresa, id_punto, id_escritorio, id_transaccion, tiempo):
         self.Dpi = Dpi 
         self.nombre = nombre
         self.id_empresa = id_empresa
         self.id_punto = id_punto
+        self.id_escritorio = id_escritorio
+        self.id_transaccion = id_transaccion
+        self.tiempo = tiempo
 
         self.siguienteDpi = None
         self.siguienteNombre = None
         self.siguienteId_empresa = None
         self.siguienteId_punto = None
+        self.siguienteId_escritorio = None
+        self.siguienteId_transaccion = None
+        self.siguienteTiempo = None
 
     #obtener datos
 
@@ -26,6 +30,15 @@ class Nodo:
 
     def obtenerId_punto(self):
         return self.id_punto
+    
+    def obtenerId_escritorio(self):
+        return self.id_escritorio
+
+    def obtenerId_transaccion(self):
+        return self.id_transaccion
+
+    def obtenerTiempo(self):
+        return self.tiempo
 
     #obtener siguientes
 
@@ -41,29 +54,44 @@ class Nodo:
     def obtenerSiguienteId_punto(self):
         return self.siguienteId_punto
 
+    def obtenerSiguienteId_escritorio(self):
+        return self.siguienteId_escritorio
+
+    def obtenerSiguienteId_transaccion(self):
+        return self.siguienteId_transaccion
+
+    def obtenerSiguienteTiempo(self):
+        return self.siguienteTiempo
+
     #asignar nuevos datos
 
-    def asignarDato(self, Dpi, nombre, id_empresa, id_punto):
+    def asignarDato(self, Dpi, nombre, id_empresa, id_punto, id_escritorio, id_transaccion, tiempo):
         self.Dpi = Dpi
         self.nombre = nombre
         self.id_empresa = id_empresa
         self.id_punto = id_punto
+        self.id_escritorio = id_escritorio
+        self.id_transaccion = id_transaccion
+        self.tiempo = tiempo
 
-    def asignarSiguiente(self,nuevoDpi, nuevonombre, nuevoid_empresa, nuevoid_punto):
+    def asignarSiguiente(self,nuevoDpi, nuevonombre, nuevoid_empresa, nuevoid_punto, nuevoid_escritorio, nuevoid_transaccion, nuevoTiempo):
         self.siguienteDpi = nuevoDpi
         self.siguienteNombre = nuevonombre
         self.siguienteId_empresa = nuevoid_empresa
         self.siguienteId_punto = nuevoid_punto 
+        self.siguienteId_escritorio = nuevoid_escritorio
+        self.siguienteId_transaccion = nuevoid_transaccion
+        self.siguienteTiempo = nuevoTiempo
 
     
-class ListaClientes:
+class ListaAtenciones:
 
     def __init__(self):
         self.head = None
 
-    def agregar(self,Dpi,nombre, id_empresa, id_punto):
-        current = Nodo(Dpi,nombre,id_empresa, id_punto)
-        current.asignarSiguiente(self.head,self.head,self.head,self.head)
+    def agregar(self,Dpi,nombre, id_empresa, id_punto, id_escritorio, id_transaccion, tiempo):
+        current = Nodo(Dpi,nombre,id_empresa, id_punto, id_escritorio, id_transaccion, tiempo)
+        current.asignarSiguiente(self.head,self.head,self.head,self.head,self.head,self.head,self.head)
         self.head = current
 
     def tamanio(self):
@@ -99,7 +127,7 @@ class ListaClientes:
         previo = None
         encontrado = False
         while not encontrado:
-            if actual.obtenerDpi() == Dpi:
+            if actual.obtenerDatoDpi() == Dpi:
                 encontrado = True
             else:
                 previo = actual
@@ -108,36 +136,6 @@ class ListaClientes:
         if previo == None:
             self.head = actual.obtenerSiguienteDpi()
         else:
-            previo.asignarSiguiente(actual.obtenerSiguienteDpi(),actual.obtenerSiguienteNombre(),actual.obtenerSiguienteId_empresa(),actual.obtenerSiguienteId_punto())
+            previo.asignarSiguiente(actual.obtenerSiguienteDpi(),actual.obtenerSiguienteNombre(),actual.obtenerSiguienteId_empresa(),actual.obtenerSiguienteId_punto(),actual.obtenerSiguienteId_escritorio(),actual.obtenerSiguienteId_transaccion(),actual.obtenerSiguienteTiempo())
 
     
-
-    def Obtener_primer_cliente(self, id_empresa, id_punto):
-
-        actual = self.head
-        while actual != None:
-
-            if actual.obtenerId_empresa() == id_empresa and actual.obtenerId_punto() == id_punto:
-
-                dpi = actual.Dpi
-
-            actual = actual.obtenerSiguienteDpi()
-
-        return dpi
-
-    def Obtener_nombre_primer_cliente(self, id_empresa, id_punto):
-
-        actual = self.head
-        while actual != None:
-
-            if actual.obtenerId_empresa() == id_empresa and actual.obtenerId_punto() == id_punto:
-
-                name = actual.nombre
-
-            actual = actual.obtenerSiguienteDpi()
-
-        return name
-
-
-        
-        

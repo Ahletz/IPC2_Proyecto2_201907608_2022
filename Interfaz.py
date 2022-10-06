@@ -135,7 +135,7 @@ class Menus:
 
             elif seleccion == '4':
 
-                pass
+                self.llamado.Atender_cliente()
 
             elif seleccion == '5':
 

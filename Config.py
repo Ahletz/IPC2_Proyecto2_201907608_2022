@@ -89,6 +89,12 @@ class Acciones:
 
         self.analisis.Solicitud_clientes(self.id_empresa, self.id_punto)
 
+    def Atender_cliente(self):
+
+        self.analisis.Atender_cliente(self.id_empresa, self.id_punto)
+
+    
+
 
     
     

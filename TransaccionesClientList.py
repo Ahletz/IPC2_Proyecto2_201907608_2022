@@ -85,12 +85,12 @@ class ListaclientTransacciones:
 
         return contador
 
-    def Eliminar(self,Id):
+    def Eliminar(self,Id, dpi):
         actual = self.head
         previo = None
         encontrado = False
         while not encontrado:
-            if actual.obtenerDatoId() == Id:
+            if actual.obtenerId() == Id and actual.obtenerDpi() == dpi:
                 encontrado = True
             else:
                 previo = actual
@@ -103,7 +103,41 @@ class ListaclientTransacciones:
 
 
 
-   
+    def Obtener_cantidad_transacciones(self, dpi):
+
+        actual = self.head
+        contador = 0
+
+        while actual != None:
+
+            if actual.obtenerDpi() == dpi:
+
+                contador +=1
+
+            actual = actual.obtenerSiguienteDpi()
+
+        return contador
+
+    def Obtener_id_transacciones(self, dpi, no_transaccion):
+
+        actual = self.head
+        contador = 0
+
+        while actual != None:
+
+            if actual.obtenerDpi() == dpi:
+
+                contador +=1
+
+            if contador == no_transaccion:
+
+                id_transaccion = actual.id
+
+            actual = actual.obtenerSiguienteDpi()
+
+        return id_transaccion
+
+
 
 
         

@@ -225,6 +225,23 @@ class ListaTransacciones:
         return id_transaccion
 
 
+    def Obtener_tiempo(self, id_empresa, id_transaccion):
+
+
+        actual = self.head
+        tiempo = 0
+
+        while actual != None:
+
+            if actual.obtenerId_Empresa() == id_empresa and actual.obtenerId() == id_transaccion:
+
+                tiempo = actual.tiempo
+
+            actual = actual.obtenerSiguienteId()
+
+        return tiempo
+
+
         
         
 
